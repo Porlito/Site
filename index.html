@@ -25,27 +25,68 @@
     
     <button id="fix-btn" py-click="run_fix">Fix Grammar</button>
     
-    <div id="output">Initializing Python (Heavy load, please wait)...</div>
+    <div id="output">Initializing System (Downloading 150MB+)...</div>
 
-    <script type="py" config="./pyscript.toml">
-        from pyscript import document
-        import inference_logic 
+    <script type="py">
+        import os
+        import sys
+        import asyncio
+        from pyscript import document, pyodide
+
+        # --- CONFIGURATION ---
+        base_url = "https://raw.githubusercontent.com/Porlito/Inference-engine/main/visheratin%E2%81%84t5-efficient-tiny-grammar-correction/"
+        
+        files_to_fetch = {
+            f"{base_url}A.py": "inference_logic.py",
+            f"{base_url}config.json": "model/config.json",
+            f"{base_url}pytorch_model.bin": "model/pytorch_model.bin",
+            f"{base_url}tokenizer.json": "model/tokenizer.json",
+            f"{base_url}special_tokens_map.json": "model/special_tokens_map.json"
+        }
+
+        async def initialize_app():
+            try:
+                # 1. Load heavy packages
+                document.getElementById("output").innerText = "Loading Python Libraries..."
+                await pyodide.loadPackage(["torch", "transformers", "numpy"])
+                
+                # 2. Fetch files from GitHub into Virtual Disk
+                for url, local_path in files_to_fetch.items():
+                    document.getElementById("output").innerText = f"Fetching: {local_path}..."
+                    
+                    if "/" in local_path:
+                        os.makedirs(os.path.dirname(local_path), exist_ok=True)
+                    
+                    response = await pyodide.http.pyfetch(url)
+                    if response.status == 200:
+                        with open(local_path, "wb") as f:
+                            f.write(await response.bytes())
+                    else:
+                        raise Exception(f"Failed to download {local_path} (Status {response.status})")
+
+                # 3. Import the logic
+                sys.path.append(os.getcwd())
+                global inference_logic
+                import inference_logic
+                
+                document.getElementById("output").innerText = "Specialist Ready!"
+            except Exception as e:
+                document.getElementById("output").innerText = f"Startup Error: {str(e)}"
+
+        # Start background loading
+        asyncio.ensure_future(initialize_app())
 
         def run_fix(event):
             try:
-                # 1. Get text from the HTML textarea
                 text = document.getElementById("user-input").value
-                document.getElementById("output").innerText = "Thinking..."
+                document.getElementById("output").innerText = "Analyzing..."
                 
-                # 2. Call the function inside your A.py script
+                # Calls fix_it function inside A.py (aliased as inference_logic)
                 fixed_text = inference_logic.fix_it(text)
                 
-                # 3. Put the result back in the HTML
                 document.getElementById("output").innerText = fixed_text
             except Exception as e:
-                document.getElementById("output").innerText = f"Error: {str(e)}"
-
-        document.getElementById("output").innerText = "Specialist Ready!"
+                document.getElementById("output").innerText = f"Processing Error: {str(e)}"
     </script>
 </body>
 </html>
