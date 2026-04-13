@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
 <link rel="icon" href="favi.png">
+<link rel="stylesheet" href="https://pyscript.net/releases/2025.x.x/core.css">
+    <script type="module" src="https://pyscript.net/releases/2025.x.x/core.js"></script>
     <title>Porlito</title>
+    
 
     <script type="application/ld+json">
   "@context": "https://schema.org",
@@ -12,91 +15,31 @@
 }
 </script>
 
-<style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #ffcc00; /* Safety Yellow */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
-            color: #1a1a1a;
-        }
 
-        /* The Black Stripes */
-        .stripes {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 20px;
-            background: repeating-linear-gradient(
-                45deg,
-                #000,
-                #000 20px,
-                #ffcc00 20px,
-                #ffcc00 40px
-            );
-        }
-
-        .stripes.bottom {
-            top: auto;
-            bottom: 0;
-        }
-
-        .container {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 3rem;
-            border: 5px solid #000;
-            box-shadow: 15px 15px 0px #000;
-            max-width: 80%;
-            z-index: 1;
-        }
-
-        h1 {
-            font-size: 3rem;
-            text-transform: uppercase;
-            margin: 0;
-            letter-spacing: 2px;
-        }
-
-        h2 {
-            font-weight: 400;
-            margin-top: 10px;
-            border-top: 2px solid #000;
-            padding-top: 10px;
-        }
-
-        .status-blink {
-            display: inline-block;
-            width: 15px;
-            height: 15px;
-            background-color: red;
-            border-radius: 50%;
-            margin-right: 10px;
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-            0% { opacity: 1; }
-            50% { opacity: 0.3; }
-            100% { opacity: 1; }
-        }
-    </style>
 </head>
 <body>
-<div class="stripes"></div>
+    <textarea id="user-input" rows="4" cols="50">undocimented code is bad</textarea><br>
+    
+    <button id="fix-btn" py-click="run_fix">Fix Grammar</button>
+    
+    <div id="output">Initializing Python (Heavy load, please wait)...</div>
 
-    <div class="container">
-        <h1>PORLITO</h1>
-        <h2><span class="status-blink"></span>SITE UNDER CONSTRUCTION</h2>
-        <p>We are currently building something awesome. Check back soon!</p>
-    </div>
+    <script type="py" config="pyscript.toml">
+        from pyscript import document
+        import inference_logic # This imports your A.py as a module
 
-    <div class="stripes bottom"></div>
+        def run_fix(event):
+            # 1. Get text from the HTML textarea
+            text = document.getElementById("user-input").value
+            
+            # 2. Call the function inside your A.py script
+            # (Assuming A.py has a function called 'fix_it')
+            fixed_text = inference_logic.fix_it(text)
+            
+            # 3. Put the result back in the HTML
+            document.getElementById("output").innerText = fixed_text
+
+        document.getElementById("output").innerText = "Specialist Ready!"
+    </script>
 </body>
 </html>
