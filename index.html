@@ -34,6 +34,9 @@
         import pyodide
         from pyscript import document
 
+        # Global variable for the module
+        inference_logic = None
+
         # --- CONFIGURATION ---
         base_url = "https://raw.githubusercontent.com/Porlito/Inference-engine/main/visheratin%E2%81%84t5-efficient-tiny-grammar-correction/"
         
@@ -46,40 +49,44 @@
         }
 
         async def initialize_app():
+            global inference_logic
             try:
-                # 1. Using the pyodide engine directly to load packages
-                document.getElementById("output").innerText = "Installing Torch & Transformers..."
-                await pyodide.code.load_package(["torch", "transformers", "numpy"])
+                # 1. Use micropip - the most reliable installer in 2026
+                document.getElementById("output").innerText = "Booting Installer..."
+                import micropip
+                document.getElementById("output").innerText = "Installing Torch/Transformers (High Load)..."
+                await micropip.install(["torch", "transformers", "numpy"])
                 
-                # 2. Fetch files using the low-level pyodide fetcher
+                # 2. Fetch files
                 for url, local_path in files_to_fetch.items():
                     document.getElementById("output").innerText = f"Downloading: {local_path}..."
-                    
                     if "/" in local_path:
                         os.makedirs(os.path.dirname(local_path), exist_ok=True)
                     
-                    # Direct binary fetch
                     response = await pyodide.http.pyfetch(url)
                     if response.status == 200:
                         content = await response.bytes()
                         with open(local_path, "wb") as f:
                             f.write(content)
                     else:
-                        raise Exception(f"Failed {local_path} (Status {response.status})")
+                        raise Exception(f"404 on {local_path}")
 
-                # 3. Path setup and import
+                # 3. Final Import
                 sys.path.append(os.getcwd())
-                global inference_logic
-                import inference_logic
+                import inference_logic as logic
+                inference_logic = logic
                 
                 document.getElementById("output").innerText = "Specialist Ready!"
             except Exception as e:
                 document.getElementById("output").innerText = f"Startup Error: {str(e)}"
 
-        # Run the async initialization
         asyncio.ensure_future(initialize_app())
 
         def run_fix(event):
+            if inference_logic is None:
+                document.getElementById("output").innerText = "Please wait, still loading..."
+                return
+
             try:
                 text = document.getElementById("user-input").value
                 document.getElementById("output").innerText = "Analyzing..."
