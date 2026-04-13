@@ -1,24 +1,23 @@
+# Use [[fetch]] for remote URLs - it's more reliable for Cross-Origin
+[[fetch]]
+from = "https://raw.githubusercontent.com/Porlito/Inference-engine/main/visheratin%E2%81%84t5-efficient-tiny-grammar-correction/A.py"
+to_file = "inference_logic.py"
+
+[[fetch]]
+from = "https://raw.githubusercontent.com/Porlito/Inference-engine/main/visheratin%E2%81%84t5-efficient-tiny-grammar-correction/config.json"
+to_folder = "model"
+
+[[fetch]]
+from = "https://raw.githubusercontent.com/Porlito/Inference-engine/main/visheratin%E2%81%84t5-efficient-tiny-grammar-correction/pytorch_model.bin"
+to_folder = "model"
+
+[[fetch]]
+from = "https://raw.githubusercontent.com/Porlito/Inference-engine/main/visheratin%E2%81%84t5-efficient-tiny-grammar-correction/tokenizer.json"
+to_folder = "model"
+
+[[fetch]]
+from = "https://raw.githubusercontent.com/Porlito/Inference-engine/main/visheratin%E2%81%84t5-efficient-tiny-grammar-correction/special_tokens_map.json"
+to_folder = "model"
+
 [pyscript]
 packages = ["torch", "transformers", "numpy"]
-
-[[pyscript.files]]
-# The Inference Logic
-from = "https://raw.githubusercontent.com/Porlito/Inference-engine/main/visheratin%E2%81%84t5-efficient-tiny-grammar-correction/A.py"
-to = "inference_logic.py"
-
-# The Model Files
-[[pyscript.files]]
-from = "https://raw.githubusercontent.com/Porlito/Inference-engine/main/visheratin%E2%81%84t5-efficient-tiny-grammar-correction/config.json"
-to = "model/config.json"
-
-[[pyscript.files]]
-from = "https://raw.githubusercontent.com/Porlito/Inference-engine/main/visheratin%E2%81%84t5-efficient-tiny-grammar-correction/pytorch_model.bin"
-to = "model/pytorch_model.bin"
-
-[[pyscript.files]]
-from = "https://raw.githubusercontent.com/Porlito/Inference-engine/main/visheratin%E2%81%84t5-efficient-tiny-grammar-correction/tokenizer.json"
-to = "model/tokenizer.json"
-
-[[pyscript.files]]
-from = "https://raw.githubusercontent.com/Porlito/Inference-engine/main/visheratin%E2%81%84t5-efficient-tiny-grammar-correction/special_tokens_map.json"
-to = "model/special_tokens_map.json"
