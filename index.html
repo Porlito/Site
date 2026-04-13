@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="icon" href="favi.png">
-<link rel="stylesheet" href="https://pyscript.net/releases/2026.3.1/core.css">
-<script type="module" src="https://pyscript.net/releases/2026.3.1/core.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favi.png">
     <title>Porlito</title>
-    
+
+    <link rel="stylesheet" href="https://pyscript.net/releases/2026.3.1/core.css">
+    <script type="module" crossorigin src="https://pyscript.net/releases/2026.3.1/core.js"></script>
 
     <script type="application/ld+json">
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Porlito",
-  "url": "https://porlito.co.za/"
-}
-</script>
-
-
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Porlito",
+      "url": "https://porlito.co.za/"
+    }
+    </script>
 </head>
 <body>
+    <h1>Porlito Grammar Specialist</h1>
+    
     <textarea id="user-input" rows="4" cols="50">undocimented code is bad</textarea><br>
     
     <button id="fix-btn" py-click="run_fix">Fix Grammar</button>
@@ -26,18 +29,21 @@
 
     <script type="py" config="pyscript.toml">
         from pyscript import document
-        import inference_logic # This imports your A.py as a module
+        import inference_logic 
 
         def run_fix(event):
-            # 1. Get text from the HTML textarea
-            text = document.getElementById("user-input").value
-            
-            # 2. Call the function inside your A.py script
-            # (Assuming A.py has a function called 'fix_it')
-            fixed_text = inference_logic.fix_it(text)
-            
-            # 3. Put the result back in the HTML
-            document.getElementById("output").innerText = fixed_text
+            try:
+                # 1. Get text from the HTML textarea
+                text = document.getElementById("user-input").value
+                document.getElementById("output").innerText = "Thinking..."
+                
+                # 2. Call the function inside your A.py script
+                fixed_text = inference_logic.fix_it(text)
+                
+                # 3. Put the result back in the HTML
+                document.getElementById("output").innerText = fixed_text
+            except Exception as e:
+                document.getElementById("output").innerText = f"Error: {str(e)}"
 
         document.getElementById("output").innerText = "Specialist Ready!"
     </script>
