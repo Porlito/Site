@@ -31,7 +31,7 @@
         import os
         import sys
         import asyncio
-        import pyscript # Use the main pyscript module
+        import pyodide
         from pyscript import document
 
         # --- CONFIGURATION ---
@@ -47,19 +47,19 @@
 
         async def initialize_app():
             try:
-                # 1. Use pyscript.install for packages (The 2026 Standard)
+                # 1. Using the pyodide engine directly to load packages
                 document.getElementById("output").innerText = "Installing Torch & Transformers..."
-                await pyscript.install(["torch", "transformers", "numpy"])
+                await pyodide.code.load_package(["torch", "transformers", "numpy"])
                 
-                # 2. Fetch files using the cross-origin fetcher
+                # 2. Fetch files using the low-level pyodide fetcher
                 for url, local_path in files_to_fetch.items():
                     document.getElementById("output").innerText = f"Downloading: {local_path}..."
                     
                     if "/" in local_path:
                         os.makedirs(os.path.dirname(local_path), exist_ok=True)
                     
-                    # Using pyscript's internal fetch which is pre-configured for CORS
-                    response = await pyscript.fetch(url)
+                    # Direct binary fetch
+                    response = await pyodide.http.pyfetch(url)
                     if response.status == 200:
                         content = await response.bytes()
                         with open(local_path, "wb") as f:
@@ -67,7 +67,7 @@
                     else:
                         raise Exception(f"Failed {local_path} (Status {response.status})")
 
-                # 3. Mount and Import
+                # 3. Path setup and import
                 sys.path.append(os.getcwd())
                 global inference_logic
                 import inference_logic
@@ -76,7 +76,7 @@
             except Exception as e:
                 document.getElementById("output").innerText = f"Startup Error: {str(e)}"
 
-        # Kick off the process
+        # Run the async initialization
         asyncio.ensure_future(initialize_app())
 
         def run_fix(event):
