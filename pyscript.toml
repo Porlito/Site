@@ -3,22 +3,22 @@ packages = ["torch", "transformers", "numpy"]
 
 [[pyscript.files]]
 # The Inference Logic
-from = "https://github.com/Porlito/Inference-engine/raw/refs/heads/main/visheratin%E2%81%84t5-efficient-tiny-grammar-correction/A.py"
+from = "https://raw.githubusercontent.com/Porlito/Inference-engine/main/visheratin%E2%81%84t5-efficient-tiny-grammar-correction/A.py"
 to = "inference_logic.py"
 
-# The Model Files (Need to be listed individually for remote URLs)
+# The Model Files
 [[pyscript.files]]
-from = "https://github.com/Porlito/Inference-engine/raw/refs/heads/main/visheratin%E2%81%84t5-efficient-tiny-grammar-correction/config.json"
+from = "https://raw.githubusercontent.com/Porlito/Inference-engine/main/visheratin%E2%81%84t5-efficient-tiny-grammar-correction/config.json"
 to = "model/config.json"
 
 [[pyscript.files]]
-from = "https://github.com/Porlito/Inference-engine/raw/refs/heads/main/visheratin%E2%81%84t5-efficient-tiny-grammar-correction/pytorch_model.bin"
+from = "https://raw.githubusercontent.com/Porlito/Inference-engine/main/visheratin%E2%81%84t5-efficient-tiny-grammar-correction/pytorch_model.bin"
 to = "model/pytorch_model.bin"
 
 [[pyscript.files]]
-from = "https://github.com/Porlito/Inference-engine/raw/refs/heads/main/visheratin%E2%81%84t5-efficient-tiny-grammar-correction/tokenizer.json"
+from = "https://raw.githubusercontent.com/Porlito/Inference-engine/main/visheratin%E2%81%84t5-efficient-tiny-grammar-correction/tokenizer.json"
 to = "model/tokenizer.json"
 
 [[pyscript.files]]
-from = "https://github.com/Porlito/Inference-engine/raw/refs/heads/main/visheratin%E2%81%84t5-efficient-tiny-grammar-correction/special_tokens_map.json"
+from = "https://raw.githubusercontent.com/Porlito/Inference-engine/main/visheratin%E2%81%84t5-efficient-tiny-grammar-correction/special_tokens_map.json"
 to = "model/special_tokens_map.json"
