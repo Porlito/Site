@@ -9,8 +9,22 @@ import {
 } from "@heroicons/react/24/outline";
 
 // REPLACE THESE WITH YOUR ACTUAL GITHUB RAW TXT/JSON URLS
-const GITHUB_USERS_URL = "https://github.com/Porlito/Site/blob/main/data/users.json";
-const GITHUB_JOBS_URL = "https://github.com/Porlito/Site/blob/main/data/jobs.json";
+const GITHUB_USERS_URL = "[
+  {
+    "email": "student@example.com",
+    "password": "pass",
+    "name": "Original Student"
+  }
+]";
+const GITHUB_JOBS_URL = "[
+  {
+    "id": 1,
+    "company": "Initial Company",
+    "logo": "https://via.placeholder.com/60",
+    "title": "Software Intern",
+    "description": "Initial posting."
+  }
+]";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState("browse");
