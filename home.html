@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Porlito — Experience Shouldn't Need Experience</title>
+  
+  <!-- Modern Clean Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Strictly Black and White System */
+    :root {
+      --bg: #000000;
+      --surface: #0a0a0a;
+      --border: #222222;
+      --text-main: #ffffff;
+      --text-muted: #888888;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: 'IBM Plex Mono', monospace;
+      line-height: 1.6;
+      padding: 0 24px;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* Header / Brand */
+    header {
+      padding: 40px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      color: var(--text-main);
+      display: inline-block;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 80px 0 60px;
+    }
+
+    .main-catchphrase {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 4.2rem);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      margin-bottom: 32px;
+      color: var(--text-main);
+    }
+
+    /* SA Context Statement */
+    .context-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 32px;
+      border-radius: 4px;
+      margin-bottom: 60px;
+    }
+
+    .stat-badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--bg);
+      background: var(--text-main);
+      padding: 4px 10px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .context-text {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .context-text strong {
+      color: var(--text-main);
+    }
+
+    /* Black & White Animated Pipeline Visual */
+    .pipeline-container {
+      border: 1px solid var(--border);
+      padding: 40px 24px;
+      margin: 40px 0;
+      background: var(--surface);
+    }
+
+    .pipeline-svg {
+      width: 100%;
+      height: auto;
+      max-height: 120px;
+    }
+
+    .pipeline-line {
+      stroke: var(--border);
+      stroke-width: 2;
+    }
+
+    .node-circle {
+      fill: var(--bg);
+      stroke: var(--text-main);
+      stroke-width: 2;
+    }
+
+    .node-inner {
+      fill: var(--text-main);
+    }
+
+    .traveling-dot {
+      fill: var(--text-main);
+    }
+
+    .node-label {
+      fill: var(--text-muted);
+      font-size: 11px;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="brand-logo">PORLITO</div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <h1 class="main-catchphrase">
+          Your experience shouldn't need experience.
+        </h1>
+
+        <div class="context-block">
+          <span class="stat-badge">The South African Context</span>
+          <p class="context-text">
+            With South African youth unemployment sitting at over <strong>47%</strong>, millions of capable young professionals are locked out of the economy by the entry-level experience trap.
+          </p>
+          <p class="context-text">
+            <strong>Porlito</strong> converts real technical execution and project contributions into verified capability credentials.
+          </p>
+        </div>
+
+        <!-- Black & White Animated SVG Pipeline -->
+        <div class="pipeline-container">
+          <svg className="pipeline-svg" viewBox="0 0 800 100" width="100%">
+            <!-- Path Line -->
+            <line x1="50" y1="50" x2="750" y2="50" class="pipeline-line" />
+            
+            <!-- Traveling White Dot -->
+            <circle r="4" class="traveling-dot">
+              <animateMotion path="M 50 50 L 750 50" dur="4s" repeatCount="indefinite" />
+            </circle>
+
+            <!-- Pipeline Nodes -->
+            <g>
+              <circle cx="50" cy="50" r="10" class="node-circle" />
+              <circle cx="50" cy="50" r="4" class="node-inner" />
+              <text x="50" y="85" text-anchor="middle" class="node-label">UNIVERSITY</text>
+            </g>
+            <g>
+              <circle cx="225" cy="50" r="10" class="node-circle" />
+              <circle cx="225" cy="50" r="4" class="node-inner" />
+              <text x="225" y="85" text-anchor="middle" class="node-label">REAL PROJECT</text>
+            </g>
+            <g>
+              <circle cx="400" cy="50" r="10" class="node-circle" />
+              <circle cx="400" cy="50" r="4" class="node-inner" />
+              <text x="400" y="85" text-anchor="middle" class="node-label">CONTRIBUTION</text>
+            </g>
+            <g>
+              <circle cx="575" cy="50" r="10" class="node-circle" />
+              <circle cx="575" cy="50" r="4" class="node-inner" />
+              <text x="575" y="85" text-anchor="middle" class="node-label">VERIFIED</text>
+            </g>
+            <g>
+              <circle cx="750" cy="50" r="10" class="node-circle" />
+              <circle cx="750" cy="50" r="4" class="node-inner" />
+              <text x="750" y="85" text-anchor="middle" class="node-label">CAREER</text>
+            </g>
+          </svg>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div>PORLITO &copy; 2026</div>
+      <div>PROOF OF CAPABILITY</div>
+    </footer>
+  </div>
+
+</body>
+</html>
