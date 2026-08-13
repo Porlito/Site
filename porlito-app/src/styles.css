@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@500;700&display=swap');
+
+:root {
+  --bg-primary: #030712;
+  --bg-surface: #0b0f19;
+  --bg-card: #111827;
+  --border-color: #1f2937;
+  --border-accent: #1e3a8a;
+
+  --text-primary: #f9fafb;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+
+  /* Blue Signal Theme */
+  --accent-blue: #3b82f6;
+  --accent-blue-hover: #2563eb;
+  --accent-glow: rgba(59, 130, 246, 0.4);
+  --accent-light: #60a5fa;
+}
+
+.porlito-app {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'IBM Plex Mono', monospace;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+nav {
+  border-bottom: 1px solid var(--border-color);
+  background: rgba(3, 7, 18, 0.85);
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+}
+
+.logo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.875rem;
+}
+
+.nav-links a:hover, .nav-links a.active {
+  color: var(--accent-light);
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent-blue);
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 10px var(--accent-glow);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(59, 130, 246, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+
+.btn-primary {
+  background: var(--accent-blue);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: var(--accent-blue-hover);
+  box-shadow: 0 0 16px var(--accent-glow);
+}
+
+.btn-full { width: 100%; }
+
+.view { padding: 60px 0; }
+.hero { padding: 80px 0 40px; text-align: center; }
+.hero h1 { font-size: 3rem; margin-bottom: 20px; }
+.hero p { color: var(--text-secondary); max-width: 600px; margin: 0 auto 32px; font-size: 1.1rem; }
+
+.subtitle { color: var(--text-secondary); margin-top: 12px; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 24px;
+  border-radius: 8px;
+}
+
+.card h3 { margin: 12px 0 8px; }
+.card p { color: var(--text-secondary); font-size: 0.9rem; }
+
+.pipeline-container {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 32px;
+  margin: 40px 0;
+  text-align: center;
+}
+
+.pipeline-svg { width: 100%; max-width: 800px; height: 120px; }
+.pipeline-line { stroke: var(--border-color); stroke-width: 2; }
+.node-circle { fill: var(--bg-surface); stroke: var(--accent-blue); stroke-width: 2; }
+.traveling-dot { fill: var(--accent-light); filter: drop-shadow(0 0 6px var(--accent-blue)); }
+
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--accent-blue);
+  padding: 16px 24px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 1000;
+}
+
+.form-container { max-width: 500px; }
+.form-group { margin-bottom: 20px; text-align: left; }
+.form-group label { display: block; margin-bottom: 8px; font-size: 0.875rem; color: var(--text-secondary); }
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: #fff;
+  font-family: inherit;
+}
+.form-group input:focus { outline: none; border-color: var(--accent-blue); }
